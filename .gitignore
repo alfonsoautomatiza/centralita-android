@@ -9,6 +9,7 @@
 !docs/images/*.png
 !docs/images/*.jpg
 !docs/images/*.svg
+!index.html
 !.github/ISSUE_TEMPLATE/*.md
 !.github/ISSUE_TEMPLATE/config.yml
 !.githooks/pre-commit

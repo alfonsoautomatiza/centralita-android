@@ -13,7 +13,7 @@ mapfile -t files < <(git diff --cached --name-only --diff-filter=ACMR)
 
 for file in "${files[@]}"; do
   case "$file" in
-    .gitignore | README.md | docs/*.md | docs/images/*.png | docs/images/*.jpg | docs/images/*.svg) ;;
+    .gitignore | README.md | index.html | docs/*.md | docs/images/*.png | docs/images/*.jpg | docs/images/*.svg) ;;
     .github/ISSUE_TEMPLATE/*.md | .github/ISSUE_TEMPLATE/config.yml | .githooks/pre-commit) ;;
     *) fail "file not allowed in the public repository: $file" ;;
   esac

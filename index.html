@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Centralita CRM para Android — Descarga</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #1A1A2E; color: #EAEAF0;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: #16213E; border: 1px solid #26365E; border-radius: 16px;
+      max-width: 560px; width: 100%; padding: 40px 32px; text-align: center;
+    }
+    h1 { font-size: 1.6rem; margin-bottom: 8px; }
+    .accent { color: #4ECDC4; }
+    p.sub { color: #A8B3CF; margin-bottom: 24px; }
+    .download {
+      display: inline-block; background: #4ECDC4; color: #10201F;
+      font-weight: 700; font-size: 1.05rem; text-decoration: none;
+      padding: 14px 36px; border-radius: 999px; margin-bottom: 20px;
+    }
+    .download:hover { filter: brightness(1.1); }
+    .meta { font-size: 0.85rem; color: #7C8AA8; margin-bottom: 28px; }
+    .steps { text-align: left; font-size: 0.92rem; color: #C9D2E6; line-height: 1.6; }
+    .steps strong { color: #EAEAF0; }
+    .warn {
+      margin-top: 24px; font-size: 0.82rem; color: #C9A36A;
+      background: #2A2416; border: 1px solid #4A3E22; border-radius: 8px; padding: 12px;
+    }
+    a.doc { color: #4ECDC4; }
+    footer { margin-top: 28px; font-size: 0.78rem; color: #5D6A85; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Centralita CRM <span class="accent">para Android</span></h1>
+    <p class="sub">Identificación de llamadas con los datos de tu CRM, también sin conexión.</p>
+
+    <a class="download" id="apk-link" href="https://github.com/alfonsoautomatiza/centralita-android/releases" >Descargar APK</a>
+    <p class="meta">Versión beta · ARM64 · Android 8.0 o superior</p>
+
+    <div class="steps">
+      <strong>Instalación:</strong>
+      <ol>
+        <li>Descarga el APK en tu teléfono.</li>
+        <li>Abre el archivo y acepta instalar desde esta fuente (solo la primera vez).</li>
+        <li>Regístrate con tu cuenta; un administrador aprobará tu terminal.</li>
+        <li>Sincroniza y listo: las llamadas se identificarán solas.</li>
+      </ol>
+    </div>
+
+    <div class="warn">
+      Instala la aplicación únicamente desde esta página. Si el teléfono te advierte
+      de orígenes desconocidos, verifica que el archivo proceda de esta descarga oficial.
+    </div>
+
+    <p style="margin-top:24px">
+      <a class="doc" href="https://github.com/alfonsoautomatiza/centralita-android/blob/main/docs/manual-de-uso.md">Manual de uso</a>
+      ·
+      <a class="doc" href="https://github.com/alfonsoautomatiza/centralita-android/blob/main/docs/seguridad.md">Modelo de seguridad</a>
+    </p>
+
+    <footer>La app verifica paquetes firmados y cifra tus datos en el dispositivo.</footer>
+  </main>
+  <script>
+    // Point the download button at the latest published release asset.
+    fetch("https://api.github.com/repos/alfonsoautomatiza/centralita-android/releases/latest")
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(rel => {
+        const asset = (rel.assets || []).find(a => a.name.endsWith(".apk"));
+        if (asset) {
+          document.getElementById("apk-link").href = asset.browser_download_url;
+          document.querySelector(".meta").textContent =
+            "Versión " + rel.tag_name + " · ARM64 · Android 8.0 o superior";
+        }
+      })
+      .catch(() => {/* keep placeholder link */});
+  </script>
+</body>
+</html>
